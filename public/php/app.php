@@ -1,25 +1,15 @@
 <?php
 namespace A;
-require __DIR__.'/Person.php';
-require __DIR__.'/B/Person.php';
 
-//use B\Person;
+include __DIR__ . '/A/B/Person.php';
+// include __DIR__ . '/autoload.php';
 
-use function B\hello;
-use const  B\LARAVEL;
-
-    hello();
-    echo LARAVEL;
-
-    $person = new Person();
-//    $person2 = new \B\Person();
-    $person->name = "mohamed";
-//    $person2->name = "ali";
-    $person::$country = 'palestine';
-//    $person2::$country = 'jordan';
-//echo "dddd";
-    var_dump($person);
-
+        $person2 = new Person;
+        $person->name = "mohamed";
+       $person2->name = "ali";
+        $person::$country = 'palestine';
+       $person2::$country = 'jordan';
+    var_dump( $person2);
 
     echo Person::$country;
     echo Person::MALE; //constant is static

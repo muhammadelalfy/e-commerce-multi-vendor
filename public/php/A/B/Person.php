@@ -1,13 +1,19 @@
-<?php
-namespace A;
+<?php   
+
+    namespace A\B;
+    use \Info;
 
     function hello(){
+
         echo 'Hello';
     }
 
     class Person{
 
+        use \Info;
+
         public function __construct(){
+
             echo __CLASS__;
         }
 
@@ -19,14 +25,7 @@ namespace A;
         private $age;
         public static $country;
 
-        public function setAge($age){
-            $this->age = $age;
-            return $this;
-        }
-        public function setGender($gender){
-            $this->$gender = $gender;
-            return $this;
-        }
+       
         public static function setContry($country){
             self::$country = $country;
             return self::$country;

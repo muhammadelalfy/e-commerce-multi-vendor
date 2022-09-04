@@ -1,17 +1,19 @@
 <?php
 namespace B;
 
-use A\Person as PersonA;
+//use A\Person as PersonA;
 
-
+use Info;
 
      function hello(){
         echo 'Hello';
     }
+
 const LARAVEL = 'LARAVEL B';
 
-    class Person extends PersonA
+    class Person
     {
+        use Info;
 
         public function __construct(){
             echo __CLASS__;
@@ -25,14 +27,7 @@ const LARAVEL = 'LARAVEL B';
         private $age;
         public static $country;
 
-        public function setAge($age){
-            $this->age = $age;
-            return $this;
-        }
-        public function setGender($gender){
-            $this->$gender = $gender;
-            return $this;
-        }
+        
         public static function setCountry($country){
             self::$country = $country;
             return self::$country;
