@@ -1,20 +1,28 @@
-<?php   
+<?php
 
     namespace A\B;
-    use \Info;
 
+    use Info;
+    use B\Person as personB;
+    use Human;
     function hello(){
 
         echo 'Hello';
     }
 
-    class Person{
+    class Person extends personB {
 
-        use \Info;
+        use Info;
 
         public function __construct(){
 
             echo __CLASS__;
+        }
+
+        public function setAddress($address)
+        {
+            $this->$address = $address;
+            return $this->$address;
         }
 
         const MALE='M';
@@ -25,10 +33,18 @@
         private $age;
         public static $country;
 
-       
+
         public static function setContry($country){
             self::$country = $country;
             return self::$country;
+        }
+
+        public function age($age){
+            return $this->age;
+        }
+
+        public function name($name){
+            return $this->name;
         }
 
     }

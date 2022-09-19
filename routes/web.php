@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 $route = app()->make('router');
 /*
@@ -16,3 +17,5 @@ $route = app()->make('router');
 $route->get('/', function () {
     return view('welcome');
 });
+
+$route->match(['get' , 'post'],'welcome/index', [DashboardController::class , 'index']);
