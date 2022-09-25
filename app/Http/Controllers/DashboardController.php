@@ -14,6 +14,6 @@ class DashboardController extends Controller
 
 //        return View::make('dashboard');
          return response()->view('dashboard.index');
-         
+
     }
 }
