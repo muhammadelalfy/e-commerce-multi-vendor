@@ -40,9 +40,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block">{{Auth::user()->name}}</a>
                 </div>
             </div>
+            <br>
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+            <br>
 
             <!-- SidebarSearch Form -->
             <div class="form-inline">
@@ -103,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-       
+
         <!-- /.content-header -->
        <div class="content">
         <div class="content-header">
