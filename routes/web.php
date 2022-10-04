@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-$route = app()->make('router');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +14,10 @@ $route = app()->make('router');
 |
 */
 
-$route->get('/', function () {
+Route::get('/', function () {
     return view('welcome');
 });
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
 
-$route->match(['get' , 'post'],'welcome/index', [DashboardController::class , 'index']);
+
