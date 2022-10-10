@@ -20,9 +20,10 @@ return new class extends Migration
                 ->constrained('categories' , 'id')
                 ->nullOnDelete();
             $table->string('name');
+            $table->string('description')->nullable();
             $table->string('slug')->unique();
-            $table->string('logo_image')->unique();
-            $table->string('cover_image')->unique();
+            $table->string('logo_image')->unique()->nullable();
+            $table->string('cover_image')->unique()->nullable();
             $table->enum('status',['active' , 'inactive'])->default('active');
             $table->timestamps();
         });

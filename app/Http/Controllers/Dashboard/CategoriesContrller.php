@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoriesContrller extends Controller
 {
@@ -14,7 +16,8 @@ class CategoriesContrller extends Controller
      */
     public function index()
     {
-        return response()->view('dashboard.categories.index');
+        $categories = Category::all();
+        return response()->view('dashboard.categories.index' , compact('categories'));
     }
 
     /**
@@ -24,7 +27,8 @@ class CategoriesContrller extends Controller
      */
     public function create()
     {
-        //
+        $parents = Category::all();
+        return view('dashboard.categories.create' , compact('parents'));
     }
 
     /**
@@ -35,7 +39,10 @@ class CategoriesContrller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->merge(['slug' => Str::slug($request->name)]);
+        Category::create($request->except('logo_image'));
+        //PRG
+        return redirect(route('categories.index'))->with(['success' => 'category saved successfully']);
     }
 
     /**
