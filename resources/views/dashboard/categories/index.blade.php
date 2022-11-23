@@ -4,13 +4,13 @@
     @parent
     <li class="breadcrumb-item active"><a href="#">start page</a></li>
 @endsection
-@if (session()->has('success'))
-    <div class="alert alert-success" role="alert">
-        {{ $request->session()->get('success'); }}
-    </div>
 
-@endif
+
 @section('content')
+    <x-alert type="success" />
+    <x-alert type="info" />
+
+    <a class="btn btn-primary" href="{{route('categories.create')}}">Create</a>
 
 <table class="table">
     <th>#</th>
@@ -24,14 +24,22 @@
     <tr>
         @forelse ($categories as $category )
             <td>{{ $loop->iteration}}</td>
-            <td>{{ @$category->image }}</td>
+            <td><img src="{{ asset('storage/' . $category->logo_image) }}" style="width: 100px; height:100px"></td>
             <td>{{ $category->name }}</td>
             <td>{{ $category->description }}</td>
             <td>{{ $category->parent }}</td>
-            <td>{{ Carbon::parse($category->created_at)->diffForHumans()}}</td>
+            <td>{{ Carbon::parse($category->created_at)->isoFormat('dddd D');}}</td>
             <td colspan="2">
                 <a type="button" href="{{ route('categories.edit' , $category->id)}}" class="btn btn-outline-primary">Edit</a>
-                <a type="button" href="{{ route('categories.destroy' , $category->id)}}" class="btn btn-outline-danger"">Delete</a>
+
+                <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                    @csrf
+
+                    @method('DELETE')
+
+                    <button type="submit" class="bbtn btn-outline-danger">Delete</button>
+                </form>
+                {{-- <a type="button" href="{{ route('categories.destroy' , $category->id)}}" class="btn btn-outline-danger"">Delete</a> --}}
 
             </td>
 
