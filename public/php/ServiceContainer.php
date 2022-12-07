@@ -4,7 +4,6 @@ class ServiceContainer
 {
     public static $container = [];
 
-
     public static function bind($name , $instance){
 
         self::$container[$name] = $instance;

@@ -15,6 +15,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->nullOnDelete();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->float('price')->default(0);
+            $table->float('compare_price')->default(0);
+            $table->json('options')->nullable();
+            $table->float('rating')->default(0);
+            $table->boolean('featured')->default(0);
+            $table->enum('status' , ['active' ,'draft','inactive'])->default('active');
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@
             <td>{{ $category->name }}</td>
             <td>{{ $category->description }}</td>
             <td>{{ $category->parent }}</td>
-            <td>{{ Carbon::parse($category->created_at)->isoFormat('dddd D');}}</td>
+            <td>{{ Carbon::parse($category->created_at)->isoFormat('dddd D')}}</td>
             <td colspan="2">
                 <a type="button" href="{{ route('categories.edit' , $category->id)}}" class="btn btn-outline-primary">Edit</a>
 

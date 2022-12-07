@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/gio', function (){
+//    define('IS_PAID' , 0);
+//    echo defined('IS_PAID');
+echo PHP_SAPI;
+});
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+
+
 
 
