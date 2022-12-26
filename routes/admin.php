@@ -8,6 +8,10 @@ use App\Http\Controllers\DashboardController;
 Route::group(['middleware'=>'auth'],function(){
     Route::resource('dashboard/categories' , CategoriesContrller::class);
 
+    Route::get('dashboard/products' , function (){
+        return 'products';
+    })->name('dashboard.products');
+
 });
 Route::get('/dashboard',[DashboardController::class , 'index'])->middleware(['auth'])->name('dashboard');
 

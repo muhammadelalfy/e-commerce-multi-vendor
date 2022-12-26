@@ -20,7 +20,7 @@
         </div>
 
         <div class="form-group">
-          <x-form.textarea name="description" :value="$category->descriptopn" />
+          <x-form.textarea name="description" :value="$category->descriptopn" label="description" />
         </div>
 
         <div class="form-group">

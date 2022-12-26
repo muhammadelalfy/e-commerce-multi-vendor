@@ -19,7 +19,20 @@ class CategoriesContrller extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $request = request();
+        $query = Category::query(); //بترجع ال query builder الخاص بال category عشان اقدر اطبق عليه جمل where وغيرها
+        if ($name = $request->query('name')){
+            $query->where('name' , 'like' , "%{$name}%");
+        }
+
+        if ($status = $request->query('status')){
+            $query->where('status'  , $status);
+        }
+
+        $categories = $query->paginate(2);
+
+        $categories = Category::active()->paginate(2);
+
         return response()->view('dashboard.categories.index', compact('categories'));
     }
 
@@ -54,7 +67,6 @@ class CategoriesContrller extends Controller
             $data['logo_image'] = $path;
         }
         $data['slug'] = Str::slug($request->name);
-
 
         Category::create($data);
         //PRG

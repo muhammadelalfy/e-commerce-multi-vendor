@@ -9,7 +9,6 @@
     @endif
 
 <div class="form-group">
-    <label for="">Name</label>
     <textarea
         name="{{$name}}"  class="form-control"
     {{$attributes->class([

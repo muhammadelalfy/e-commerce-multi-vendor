@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
- @section('title' , 'starter page') 
+ @section('title' , 'starter page')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active"><a href="#">start page</a></li>
@@ -68,12 +68,11 @@
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
-        </div>
  @endsection
  @push('css')
  <link rel="stylesheet" href="<?php echo asset('dist/css/adminlte.min.css')  ?>">
-
  @endpush
+
 
  @push('script')
  <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
