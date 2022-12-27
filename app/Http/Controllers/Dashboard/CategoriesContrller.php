@@ -19,20 +19,21 @@ class CategoriesContrller extends Controller
      */
     public function index()
     {
-        $request = request();
-        $query = Category::query(); //بترجع ال query builder الخاص بال category عشان اقدر اطبق عليه جمل where وغيرها
-        if ($name = $request->query('name')){
-            $query->where('name' , 'like' , "%{$name}%");
-        }
-
-        if ($status = $request->query('status')){
-            $query->where('status'  , $status);
-        }
-
-        $categories = $query->paginate(2);
-
-        $categories = Category::active()->paginate(2);
-
+        //old way to filter
+//        $request = request();
+//        $query = Category::query(); //بترجع ال query builder الخاص بال category عشان اقدر اطبق عليه جمل where وغيرها
+//        if ($name = $request->query('name')){
+//            $query->where('name' , 'like' , "%{$name}%");
+//        }
+//
+//        if ($status = $request->query('status')){
+//            $query->where('status'  , $status);
+//        }
+//        $categories = $query->paginate(2);
+        //left join with eloquent
+        $categories = Category::leftJoin('categories as parents' , 'categories.parent_id', '=' , 'parents.id')
+            ->select(['categories.*' , 'parents.name as parent_name'])
+            ->filter(\request()->query())->paginate(1);
         return response()->view('dashboard.categories.index', compact('categories'));
     }
 
@@ -160,15 +161,33 @@ class CategoriesContrller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         // dd('s');
-        $category = Category::findOrFail($id);
         $category->delete(); //delete data only from db but category object still exists
-        if($category->logo_image){
-            Storage::disk('public')->delete($category->logo_image);
-        }
+//        if($category->logo_image){
+//            Storage::disk('public')->delete($category->logo_image);
+//        }
         return redirect(route('categories.index'))->with(['success' => 'deleted successfully']);
 
+    }
+    public function trashed(){
+        $categories = Category::onlyTrashed()->paginate(1);
+        return view('dashboard.categories.trashed' , compact('categories'));
+    }
+
+    public function restore($id){
+        $trashedCategory = Category::onlyTrashed()->findOrFail($id);
+        $trashedCategory->restore();
+        return redirect()->back()->with('success' , 'restored successfully');
+    }
+
+    public function forceDelete($id){
+        $trashedCategory = Category::onlyTrashed()->findOrFail($id);
+        $trashedCategory->forceDelete();
+        if($trashedCategory->logo_image){
+            Storage::disk('public')->delete($trashedCategory->logo_image);
+        }
+        return redirect()->route('categories.trashed')->with('success' , 'deleted permanent !');
     }
 }

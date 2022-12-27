@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
- @section('title' , 'starter page')
+ @section('title' , 'Trashed Categories')
 @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active"><a href="#">start page</a></li>
@@ -11,7 +11,6 @@
     <x-alert type="info" />
 
     <a class="btn btn-sm btn-outline-primary " href="{{route('categories.create')}}">Create</a>
-    <a class="btn btn-sm btn-outline-dark " href="{{route('categories.trashed')}}">trashed</a>
 
     <form action="{{\Illuminate\Support\Facades\URL::current()}}"  method="get" class="d-flex justify-content-between mt-4">
         <x-form.input name="name" placeholder-="Name" class="mx-2" :value="request('name')" />
@@ -28,8 +27,7 @@
     <th>image</th>
     <th>name</th>
     <th>description</th>
-    <th>parent</th>
-    <th>date</th>
+    <th>deleted at</th>
     <th colspan="2">actions</th>
 
     <tr>
@@ -38,22 +36,22 @@
             <td><img src="{{ asset('storage/' . $category->logo_image) }}" style="width: 100px; height:100px"></td>
             <td>{{ $category->name }}</td>
             <td>{{ $category->description }}</td>
-            <td>{{ @$category->parent_name }}</td>
-            <td>{{ Carbon::parse($category->created_at)->isoFormat('dddd D')}}</td>
-            <td colspan="2">
-                <div class="flex-column">
-                <a type="button" href="{{ route('categories.edit' , $category->id)}}" class="btn btn-outline-primary">Edit</a>
-
-                <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+            <td>{{ Carbon::parse($category->deleted_at)->isoFormat('dddd D')}}</td>
+            <td>
+                <form action="{{ route('categories.restore', $category->id) }}" method="POST">
                     @csrf
-
-                    @method('DELETE')
-
-                    <button type="submit" class="bbtn btn-outline-danger">Delete</button>
+                    @method('put')
+                    <button type="submit" class="btn btn-outline-dark">Restore</button>
                 </form>
-                {{-- <a type="button" href="{{ route('categories.destroy' , $category->id)}}" class="btn btn-outline-danger"">Delete</a> --}}
-                </div>
             </td>
+            <td>
+                <form action="{{ route('categories.forceDelete', $category->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger">Force Delete</button>
+                </form>
+            </td>
+
 
     </tr>
         @empty

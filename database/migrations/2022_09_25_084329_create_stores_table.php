@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
+            $table->string('name');
+            $table->string('description');
             $table->string('logo_image')->unique();
             $table->string('cover_image')->unique();
             $table->enum('status',['active' , 'inactive'])->default('active');
