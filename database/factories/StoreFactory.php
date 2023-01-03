@@ -21,7 +21,7 @@ class StoreFactory extends Factory
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            'description' => $this->faker->sentences(15),
+            'description' => $this->faker->sentence(15),
             'logo_image' => $this->faker->imageUrl(300,300),
             'cover_image' => $this->faker->imageUrl(800,600),
         ];

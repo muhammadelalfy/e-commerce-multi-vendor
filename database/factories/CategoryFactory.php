@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class CategoriesFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +17,13 @@ class CategoriesFactory extends Factory
      */
     public function definition()
     {
-       $name = $this->faker->words(2 , true);
+       $name = $this->faker->department;
        return [
            'name' => $name,
            'slug' => Str::slug($name),
-           'description' => $this->faker->sentences(15),
-           'image' => $this->faker->imageUrl
+           'description' => $this->faker->sentence(15),
+           'logo_image' => $this->faker->imageUrl(300,300),
+           'cover_image' => $this->faker->imageUrl(800,600),
        ];
     }
 }

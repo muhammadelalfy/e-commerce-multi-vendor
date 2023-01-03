@@ -25,33 +25,26 @@
 
 <table class="table">
     <th>#</th>
-    <th>image</th>
     <th>name</th>
-    <th>description</th>
-    <th>parent</th>
+    <th>Category</th>
+    <th>Store</th>
+    <th>Status</th>
     <th>date</th>
     <th colspan="2">actions</th>
 
     <tr>
-        @forelse ($categories as $category )
+        @forelse ($products as $product )
             <td>{{ $loop->iteration}}</td>
-            <td><img src="{{ asset('storage/' . $category->logo_image) }}" style="width: 100px; height:100px"></td>
-            <td>{{ $category->name }}</td>
-            <td>{{ $category->description }}</td>
-            <td>{{ $category->parent->name }}</td>
-            <td>{{ Carbon::parse($category->created_at)->isoFormat('dddd D')}}</td>
+            <td>{{ $product->name}}</td>
+            <td>{{ $product->category->name }}</td>
+            <td>{{ $product->store->name }}</td>
+            <td>{{ $product->status }}</td>
+            <td>{{ Carbon::parse($product->created_at)->isoFormat('dddd D')}}</td>
             <td colspan="2">
                 <div class="flex-column">
-                <a type="button" href="{{ route('categories.edit' , $category->id)}}" class="btn btn-outline-primary">Edit</a>
+                <a type="button" href="{{ route('products.edit' , $product->id)}}" class="btn btn-outline-primary">Edit</a>
 
-                <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
-                    @csrf
-
-                    @method('DELETE')
-
-                    <button type="submit" class="bbtn btn-outline-danger">Delete</button>
-                </form>
-                {{-- <a type="button" href="{{ route('categories.destroy' , $category->id)}}" class="btn btn-outline-danger"">Delete</a> --}}
+                {{-- <a type="button" href="{{ route('categories.destroy' , $product->id)}}" class="btn btn-outline-danger"">Delete</a> --}}
                 </div>
             </td>
 
@@ -59,12 +52,12 @@
         @empty
         <tr>
             <td colspan="9" style="text-align: center">
-            Categories not defined !
+            products not defined !
             </td>
         @endforelse
     </tr>
 </table>
-    {{$categories->withQueryString()->appends(['search' => 'keysearch'])->links()}}
+    {{$products->withQueryString()->appends(['search' => 'keysearch'])->links()}}
 
  @endsection
 

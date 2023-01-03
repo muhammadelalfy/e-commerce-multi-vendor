@@ -31,9 +31,10 @@ class CategoriesContrller extends Controller
 //        }
 //        $categories = $query->paginate(2);
         //left join with eloquent
-        $categories = Category::leftJoin('categories as parents' , 'categories.parent_id', '=' , 'parents.id')
+        $categories = Category::with('parent')/*leftJoin('categories as parents' , 'categories.parent_id', '=' , 'parents.id')
             ->select(['categories.*' , 'parents.name as parent_name'])
-            ->filter(\request()->query())->paginate(1);
+            */->filter(\request()->query())->paginate(2);
+//            dump($categories);
         return response()->view('dashboard.categories.index', compact('categories'));
     }
 
