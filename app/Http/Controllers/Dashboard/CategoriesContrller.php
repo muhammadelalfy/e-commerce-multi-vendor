@@ -33,7 +33,16 @@ class CategoriesContrller extends Controller
         //left join with eloquent
         $categories = Category::with('parent')/*leftJoin('categories as parents' , 'categories.parent_id', '=' , 'parents.id')
             ->select(['categories.*' , 'parents.name as parent_name'])
-            */->filter(\request()->query())->paginate(2);
+            */
+//            ->select('categories.*')
+//        ->selectRaw('(SELECT COUNT(*) FROM products WHERE category_id = categories.id ) as products_count')
+            ->withCount([
+
+                'products as product_number'   => function ($builder){      //laravel return builder object inside the method
+                    $builder->where('status' , 'active');
+                }
+        ])
+        ->filter(\request()->query())->paginate(2);
 //            dump($categories);
         return response()->view('dashboard.categories.index', compact('categories'));
     }
@@ -79,11 +88,12 @@ class CategoriesContrller extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+
+        return view('dashboard.categories.show' , compact('category'));
+
     }
 
     /**
@@ -94,7 +104,6 @@ class CategoriesContrller extends Controller
      */
     public function edit($id)
     {
-
         // dd($category->description);
         try {
 
@@ -122,8 +131,6 @@ class CategoriesContrller extends Controller
     {
         // dd($request);
         $data = $request->except('logo_image');
-
-
         if ($request->hasFile('logo_image')) {
             $file = $request->file('logo_image'); //object of uploadedfile
             $path = $file->store('uploads', ['disk'=>'public']); //STORE LOCAL IN STORAGE/APP

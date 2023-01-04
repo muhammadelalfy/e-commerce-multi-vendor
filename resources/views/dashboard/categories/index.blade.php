@@ -28,6 +28,7 @@
     <th>image</th>
     <th>name</th>
     <th>description</th>
+    <th>products_count</th>
     <th>parent</th>
     <th>date</th>
     <th colspan="2">actions</th>
@@ -36,23 +37,27 @@
         @forelse ($categories as $category )
             <td>{{ $loop->iteration}}</td>
             <td><img src="{{ asset('storage/' . $category->logo_image) }}" style="width: 100px; height:100px"></td>
-            <td>{{ $category->name }}</td>
+            <td> <a href="{{route('categories.show' , $category->id)}}">{{ $category->name }}</a></td>
             <td>{{ $category->description }}</td>
+            <td>{{ $category->product_number }}</td>
             <td>{{ $category->parent->name }}</td>
             <td>{{ Carbon::parse($category->created_at)->isoFormat('dddd D')}}</td>
-            <td colspan="2">
+            <td>
                 <div class="flex-column">
                 <a type="button" href="{{ route('categories.edit' , $category->id)}}" class="btn btn-outline-primary">Edit</a>
 
+
+                {{-- <a type="button" href="{{ route('categories.destroy' , $category->id)}}" class="btn btn-outline-danger"">Delete</a> --}}
+                </div>
+            </td>
+            <td>
                 <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                     @csrf
 
                     @method('DELETE')
 
-                    <button type="submit" class="bbtn btn-outline-danger">Delete</button>
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
                 </form>
-                {{-- <a type="button" href="{{ route('categories.destroy' , $category->id)}}" class="btn btn-outline-danger"">Delete</a> --}}
-                </div>
             </td>
 
     </tr>
@@ -65,6 +70,5 @@
     </tr>
 </table>
     {{$categories->withQueryString()->appends(['search' => 'keysearch'])->links()}}
-
  @endsection
 
