@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProductsController extends Controller
 {
@@ -54,11 +56,14 @@ class ProductsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return  View
      */
     public function edit($id)
     {
-        //
+        $categories = Category::all();
+        $product = Product::findOrFail($id);
+//        dd($categories);
+        return view('dashboard.products.edit' , compact('categories' , 'product'));
     }
 
     /**
@@ -68,9 +73,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->except('tags'));
+        return redirect()->back()->with(['success' => 'Product updated']);
     }
 
     /**

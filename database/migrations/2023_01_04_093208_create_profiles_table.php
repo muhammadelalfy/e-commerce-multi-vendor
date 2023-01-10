@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->foreignId('user_id');
-            $table->string('fist_name');
+            $table->string('first_name');
             $table->string('last_name');
             $table->date('birthday')->nullable();
             $table->enum('gender',['male' , 'female'])->nullable();

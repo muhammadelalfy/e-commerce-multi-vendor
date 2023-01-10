@@ -4,7 +4,7 @@
 ])
 @foreach($options as $value => $text)
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="{{$name}}" id="exampleRadios1" value="{{$value}}" @checked($name== $value)
+        <input class="form-check-input" type="radio" name="{{$name}}" id="exampleRadios1" value="{{$value}}" @checked(old($name , $value) == $value)
           {{  $attributes->class([
                 'form-checked-input' ,
                 'is-invalid' => $errors->has($name)
@@ -15,3 +15,7 @@
         </label>
     </div>
 @endforeach
+
+@error($name)
+    {{$message}}
+@enderror

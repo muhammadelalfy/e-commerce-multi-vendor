@@ -36,5 +36,5 @@
             <x-form.label>Status</x-form.label>
            <x-form.radio  :name="$category->status" :checked="$category->status" :options="['active' => 'Active' , 'inactive' => 'Inactive' ]" />
 
-              <button type="subbmit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary">Save</button>
         </div>

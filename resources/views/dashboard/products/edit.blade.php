@@ -7,11 +7,11 @@
 
 @section('content')
 
-    <form action="{{ route('categories.update' , $category->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('products.update' , $product->id) }}" method="post" enctype="multipart/form-data">
         @method('put')
         @csrf
         {{-- <input type="hidden" name="_method" value="delete"> --}}
-        @include('dashboard.categories._form');
+        @include('dashboard.products._form');
 
 
     </form>

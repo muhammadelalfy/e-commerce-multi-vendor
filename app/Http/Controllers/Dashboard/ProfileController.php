@@ -14,21 +14,28 @@ class ProfileController extends Controller
 
         $countries = Countries::getNames();
         $locales = Languages::getNames();
-        dd($countries);
+//        dd($countries);
         return view('dashboard.profile.edit' , compact(['user' , 'countries' , 'locales']));
     }
 
     public function update(Request $request){
+//        dd(\request());
+
          $request->validate([
-            'first_name' => ['required,string,max:255'],
-            'last_name' => ['required,string,max:255'],
-            'birthday' => ['required,date,after:today'],
-            'gender' => ['required,in:male,female'],
-            'country' => ['required,string,size:2'],
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'birthday' => 'required|date|before:today',
+            'gender' => 'required|in:male,female',
+            'country' => 'required|string|size:2',
         ]);
+//         dd($request->all());
+
         $user = auth()->user();
-        $user->profile->fill($request->all())->save(); //save do update if row found and create if not found //fill store in model not in db
+
+        $user->profile->fill($request->all())->save();//save do update if row found and create if not found //fill store in model not in db
+//        dd(12);
+
 //        $user->profile()->updateOrCreate($request->all());
-        return redirect()->route('dashboard.profile.edit');
+        return redirect()->back()->with(['success' => 'profile updated successfully'])->withInput();
     }
 }

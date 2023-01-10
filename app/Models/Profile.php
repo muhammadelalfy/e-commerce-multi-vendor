@@ -9,7 +9,7 @@ class Profile extends Model
 {
     use HasFactory;
     protected $primaryKey = 'user_id';
-
+    protected $guarded = [];
     public function user(){
         return $this->belongsTo(User::class , 'user_id' , 'id')
             ; //returns empty collection

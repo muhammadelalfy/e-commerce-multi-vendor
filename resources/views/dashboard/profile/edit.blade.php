@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-
+<x-alert type="success"/>
     <form action="{{ route('dashboard.profile.update') }}" method="post" enctype="multipart/form-data">
         @method('patch')
         @csrf
@@ -20,13 +20,12 @@
             </div>
         </div>
 
-
         <div class="form-row">
             <div class="col-md-6">
-                <x-form.input name="birthday" label="Birthday" :value="$user->profile->birthday"/>
+                <x-form.input name="birthday" type="date" label="Birthday" :value="$user->profile->birthday"/>
             </div>
             <div class="col-md-6">
-                <x-form.radio name="gender" label="Last Name" :options="['male' => 'Male' , 'female' => 'female']" :checked="$user->profile->gender"/>
+                <x-form.radio name="gender"  label="Last Name" :options="['male' => 'Male' , 'female' => 'female']" :checked="$user->profile->gender"/>
             </div>
         </div>
 
@@ -37,29 +36,36 @@
             <div class="col-md-6">
                 <x-form.input name="city" label="city" :value="$user->profile->city"/>
             </div>
+
+        </div>
+
+        <div class="form-row">
             <div class="col-md-6">
                 <x-form.input name="state" label="state" :value="$user->profile->state"/>
             </div>
-        </div>
-
-        <div class="form-row">
             <div class="col-md-6">
                 <x-form.input name="postal_code" label="Postal Code" :value="$user->profile->postal_code"/>
             </div>
-            <div class="col-md-6">
-                <x-form.select name="country" label="Country" :options="$countries" :selected="$user->profile->country"/>
-            </div>
-            <div class="col-md-6">
-                <x-form.select name="locale" label="Locale" :options="$locales" :selected="$user->profile->locale"/>
-            </div>
+
         </div>
 
         <div class="form-row">
+
             <div class="col-md-6">
+                <x-form.label >Countries</x-form.label>
+                <x-form.select name="country" :options="$countries" />
+            </div>
+            <div class="col-md-6">
+                <x-form.label >Locales</x-form.label>
+                <x-form.select name="locale" :options="$locales" />
 
             </div>
+
+            <button type="submit" class="btn btn-primary mt-2 ml-2">Save</button>
+
+
         </div>
-    </form>
+
 
 @endsection
 

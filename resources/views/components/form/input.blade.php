@@ -14,19 +14,17 @@
 {{--<div class="form-control">--}}
     <input
         type="{{$type}}"
-        name="{{$name}}"  class="form-control"
+        name="{{$name}}"
         value="{{old('name' , $value)}}"
-        class="{{$class}}"
-        class="{{$placeholder}}"
+
     {{$attributes->class([
         'form-control' ,
         'is-invalid' => $errors->has($name)
     ]) }}
     >
+
     @error($name)
-    <div class="invalid-feedback">
         {{$message}}
-    </div>
     @enderror
 
 {{--</div>--}}
