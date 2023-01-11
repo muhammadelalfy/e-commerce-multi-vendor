@@ -1,6 +1,3 @@
-
-
-
     <x-form.label >Product Name</x-form.label>
     <x-form.input :value="$product->name" class="form-control-lg" role="input" name="name" />
 
@@ -9,7 +6,6 @@
         <select type="text" name="category_id" value="" class="form-control">
             <option value="">{{ 'primary category'}}</option>
             @forelse( $categories as $category)
-                @dd(old('category_id'))
                 <option value="{{$category->id}}" @selected(old('category_id' , $product->category_id) == $category->id)>{{  $category->name }} </option>
 {{--                @error('category_id')--}}
 {{--                <div class="invalid-feedback">--}}
@@ -48,7 +44,7 @@
 
          <div class="form-group">
                 <x-form.label>Tags</x-form.label>
-               <x-form.input name="tag" />
+               <x-form.input name="tags" :value="$tags" />
          </div>
 
 
@@ -60,3 +56,18 @@
 
               <button type="subbmit" class="btn btn-primary">Save</button>
         </div>
+
+
+    @push('script')
+
+        <script src="{{asset('tagify/tagify.js')}}"></script>
+        <script src="{{asset('tagify/tagify.polyfiles.min.js')}}"></script>
+        <script>
+            var input = document.querySelector('[name=tags]'),
+                tagify = new Tagify(input);
+        </script>
+    @endpush
+    @push('css')
+        <link href="{{asset('tagify/tagify.css')}}" rel="stylesheet" type="text/css" />
+
+    @endpush

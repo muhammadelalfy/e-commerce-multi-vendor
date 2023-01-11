@@ -9,7 +9,7 @@ class Tag extends Model
 {
     use HasFactory;
     public $timestamps = false;
-
+    protected $fillable = ['name' , 'slug'];
     //relations
     public function products(){
 
