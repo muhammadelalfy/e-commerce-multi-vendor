@@ -17,14 +17,14 @@
     <title>ShopGrids - Bootstrap 5 eCommerce HTML Template.</title>
 	<!-- Favicon -->
     <link rel="icon" href="img/favicon.svg">
-		
+
 	<!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 	<!-- Syntax Highlighter -->
 	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shCore.css" media="all">
 	<link rel="stylesheet" type="text/css" href="syntax-highlighter/styles/shThemeDefault.css" media="all">
-	
+
 	<!-- Normalize/Reset CSS-->
 	<link rel="stylesheet" href="css/normalize.min.css">
 	<!-- Main CSS-->
@@ -147,23 +147,23 @@
 					same throughout the template. Here is the general structure of main page (index.html).</p>
 				<pre class="brush: html">
 		                <header class="site-header">
-		                	
+
 		                </header>
 
 		                <main class="site-main">
 		                	<section class="section">
-		                		
+
 		                	</section>
 		                	<section class="section">
-		                		
+
 		                	</section>
 		                	<section class="section">
-		                		
+
 		                	</section>
 		                </main>
 
 		                <footer class="site-footer">
-		                	
+
 		                </footer>
 		            </pre>
 			</section>
@@ -209,7 +209,7 @@
 				<p>By default, the template loads this font from Google Web Font Services, you can change the font with the one that suits
 					you best.</p>
 
-				<pre class="brush:html">		                
+				<pre class="brush:html">
 					<!-- Google Font -->
 					<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 		        </pre>
@@ -226,10 +226,10 @@
 
 					<pre class="brush: html">
 						<!-- ========================= JS here ========================= -->
-						<script src="assets/js/bootstrap.min.js"></script>
-						<script src="assets/js/tiny-slider.js"></script>
-						<script src="assets/js/glightbox.min.js"></script>
-						<script src="assets/js/main.js"></script>
+						<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+						<script src="{{asset('assets/js/tiny-slider.js')}}"></script>
+						<script src="{{asset('assets/js/glightbox.min.js')}}"></script>
+						<script src="{{asset('assets/js/main.js')}}"></script>
 		            </pre>
 			</section>
 
@@ -248,7 +248,7 @@
 						}
 		            </pre>
 			</section>
-			
+
 			<section id="color-option">
 				<h2 class="title"> Color Option </h2>
 				<p>How can I change the template color?</p>
@@ -257,8 +257,8 @@
 					<li>After that just replace the $theme-color into your favirote color.</li>
 				</ul>
 			</section>
-			
-			
+
+
 			<section id="credit">
 				<h2 class="title">Source and Credit</h2>
 				<div class="script-source">

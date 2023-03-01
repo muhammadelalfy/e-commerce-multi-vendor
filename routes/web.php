@@ -15,15 +15,10 @@ use App\Http\Controllers\GioController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/gio', function (){
-//    define('IS_PAID' , 0);
-//    echo defined('IS_PAID');
-echo PHP_SAPI;
-});
+
+Route::get('/' , [\App\Http\Controllers\Front\HomeController::class,'index']);
+
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 

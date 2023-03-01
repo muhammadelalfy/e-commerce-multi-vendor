@@ -7,14 +7,14 @@
     <title>Single Product - ShopGrids Bootstrap 5 eCommerce HTML Template.</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.svg')}}" />
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
-    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
-    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/LineIcons.3.0.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/tiny-slider.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/glightbox.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}" />
 
 </head>
 
@@ -111,7 +111,7 @@
                     <div class="col-lg-3 col-md-3 col-7">
                         <!-- Start Header Logo -->
                         <a class="navbar-brand" href="index.html">
-                            <img src="assets/images/logo/logo.svg" alt="Logo">
+                            <img src="{{asset('assets/images/logo/logo.svg" alt="Logo')}}">
                         </a>
                         <!-- End Header Logo -->
                     </div>
@@ -175,7 +175,7 @@
                                                         class="lni lni-close"></i></a>
                                                 <div class="cart-img-head">
                                                     <a class="cart-img" href="product-details.html"><img
-                                                            src="assets/images/header/cart-items/item1.jpg" alt="#"></a>
+                                                            src="{{asset('assets/images/header/cart-items/item1.jpg" alt="#')}}"></a>
                                                 </div>
 
                                                 <div class="content">
@@ -189,7 +189,7 @@
                                                         class="lni lni-close"></i></a>
                                                 <div class="cart-img-head">
                                                     <a class="cart-img" href="product-details.html"><img
-                                                            src="assets/images/header/cart-items/item2.jpg" alt="#"></a>
+                                                            src="{{asset('assets/images/header/cart-items/item2.jpg" alt="#')}}"></a>
                                                 </div>
                                                 <div class="content">
                                                     <h4><a href="product-details.html">Wi-Fi Smart Camera</a></h4>
@@ -695,7 +695,7 @@
                         <div class="col-lg-3 col-md-4 col-12">
                             <div class="footer-logo">
                                 <a href="index.html">
-                                    <img src="assets/images/logo/white-logo.svg" alt="#">
+                                    <img src="{{asset('assets/images/logo/white-logo.svg" alt="#')}}">
                                 </a>
                             </div>
                         </div>
@@ -804,7 +804,7 @@
                         <div class="col-lg-4 col-12">
                             <div class="payment-gateway">
                                 <span>We Accept:</span>
-                                <img src="assets/images/footer/credit-cards-footer.png" alt="#">
+                                <img src="{{asset('assets/images/footer/credit-cards-footer.png" alt="#')}}">
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -838,10 +838,10 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/tiny-slider.js"></script>
-    <script src="assets/js/glightbox.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/tiny-slider.js')}}"></script>
+    <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
     <script type="text/javascript">
         const current = document.getElementById("current");
         const opacity = 0.6;
@@ -853,7 +853,7 @@
                     img.style.opacity = 1;
                 });
                 current.src = e.target.src;
-                //adding class 
+                //adding class
                 //current.classList.add("fade-in");
                 //opacity
                 e.target.style.opacity = opacity;

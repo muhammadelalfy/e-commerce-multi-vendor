@@ -6,6 +6,7 @@ use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -33,5 +34,30 @@ class Product extends Model
             'id', // pk of current model
             'id' // pk of related model
         );
+    }
+
+    public function ScopeActive(Builder $builder)
+    {
+        $builder->where('status','active');
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image){
+            return 'https://cdn-icons-png.flaticon.com/512/158/158764.png';
+
+        }
+        elseif (Str::startsWith($this->image , ['http://' , 'https://'])){
+            return $this->image;
+        }
+        return asset('storage' . $this->image);
+    }
+
+    public function getSalePercentAttribute()
+    {
+        if (!$this->conmare_price){
+            return 0;
+        }
+        return  100 - (100 * $this->compare_price / $this->conmare_price);
     }
 }
