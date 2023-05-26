@@ -5,7 +5,7 @@ namespace App\View\Components;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
-class nav extends Component
+class Nav extends Component
 {
     protected $items;
     public $currentRoute;

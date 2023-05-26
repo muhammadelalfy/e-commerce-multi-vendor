@@ -19,6 +19,10 @@ use App\Http\Controllers\GioController;
 
 Route::get('/' , [\App\Http\Controllers\Front\HomeController::class,'index']);
 
+Route::view('/{any?}', 'dashboard')
+    ->name('dashboard')
+    ->where('any', '.*');
+    
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 
