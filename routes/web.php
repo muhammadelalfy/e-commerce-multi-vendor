@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Front\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +16,16 @@ use App\Http\Controllers\GioController;
 
 
 
-Route::get('/' , [\App\Http\Controllers\Front\HomeController::class,'index']);
+Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index']);
 
-Route::view('/{any?}', 'dashboard')
-    ->name('dashboard')
-    ->where('any', '.*');
-    
-require __DIR__.'/auth.php';
-require __DIR__.'/admin.php';
+// Route::view('/{any?}', 'dashboard')
+//     ->name('dashboard')
+//     ->where('any', '.*');
+
+//products
+Route::resource('product', ProductController::class);
+Route::get('product/{product:slug}', [ProductController::class,'show'])->name('product.show'); //take slug insted of id and go to show method
 
 
-
-
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
