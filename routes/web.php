@@ -16,16 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index'])->name('home');
 
 // Route::view('/{any?}', 'dashboard')
 //     ->name('dashboard')
 //     ->where('any', '.*');
 
 //products
-Route::resource('product', ProductController::class);
-Route::get('product/{product:slug}', [ProductController::class,'show'])->name('product.show'); //take slug insted of id and go to show method
-
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/site.php';
 require __DIR__ . '/admin.php';

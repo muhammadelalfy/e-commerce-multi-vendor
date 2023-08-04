@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ProductStatusEnum;
 use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +12,8 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
+    const Active = ProductStatusEnum::Active;
+    const Inactive = ProductStatusEnum::Inactive;
     protected $fillable = ['name' , 'description' , 'slug' , 'store_id' , 'category_id' , 'price' , 'compare_price' , 'status'];
     public function Category(){
       return  $this->belongsTo(Category::class, 'category_id' , 'id');
@@ -55,9 +58,9 @@ class Product extends Model
 
     public function getSalePercentAttribute()
     {
-        if (!$this->conmare_price){
+        if (!$this->compare_price){
             return 0;
         }
-        return  100 - (100 * $this->compare_price / $this->conmare_price);
+        return  number_format(100 - (100 * $this->price / $this->compare_price),1);
     }
 }
