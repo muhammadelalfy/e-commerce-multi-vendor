@@ -32,8 +32,8 @@
             </li>
         </ul>
         <div class="price">
-            <span>{{ $product->price }}</span>
-            <span class="discount-price">{{ $product->compare_price ?? '' }}</span>
+            <span>{{ Currency::formatCurrency($product->price,'USD') }}</span>
+            <span class="discount-price">{{ Currency::formatCurrency($product->compare_price,'USD') ?? '' }}</span>
 
         </div>
     </div>

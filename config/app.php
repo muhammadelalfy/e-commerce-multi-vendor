@@ -18,6 +18,11 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
+     * default currency
+     * */
+    'currency' => 'USD',
+
+    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
@@ -41,7 +46,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +87,7 @@ return [
     |
     */
 
-    'locale' => 'ar',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -211,6 +216,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Carbon' => Illuminate\Support\Carbon::class,
+        'Currency' => App\Helpers\Currency::class
 
     ])->toArray(),
 

@@ -4,7 +4,7 @@ use App\Http\Controllers\Dashboard\{ProductsController, CategoriesContrller, Pro
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
-Route::group(['middleware'=>'auth'],function(){
+Route::group(['middleware'=>['auth','auth.type:user,admin']],function(){
 //categories
     Route::resource('dashboard/categories' , CategoriesContrller::class);
     Route::get('categories/trashed' , [CategoriesContrller::class , 'trashed'])->name('categories.trashed');

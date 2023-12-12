@@ -27,13 +27,6 @@
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
-  'mbezhanov/laravel-faker-provider-collection' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Bezhanov\\Faker\\Laravel\\FakerServiceProvider',
-    ),
-  ),
   'nesbot/carbon' => 
   array (
     'providers' => 
