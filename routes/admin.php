@@ -4,7 +4,7 @@ use App\Http\Controllers\Dashboard\{ProductsController, CategoriesContrller, Pro
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
-Route::group(['middleware'=>['auth','auth.type:user,admin']],function(){
+Route::group(['middleware'=>['auth']],function(){
 //categories
     Route::resource('dashboard/categories' , CategoriesContrller::class);
     Route::get('categories/trashed' , [CategoriesContrller::class , 'trashed'])->name('categories.trashed');
@@ -19,7 +19,8 @@ Route::group(['middleware'=>['auth','auth.type:user,admin']],function(){
 //products
     Route::resource('dashboard/products' , ProductsController::class);
 
-Route::get('/dashboard',[DashboardController::class , 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class , 'index'])->middleware(['auth','auth.type:admin,super_admin'])->name('dashboard');
+Route::post('/paypal/notification',[DashboardController::class , 'index']);
 
 Route::get('log' , function (\Illuminate\Http\Request $request){
 

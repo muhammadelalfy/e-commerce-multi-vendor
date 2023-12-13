@@ -6,20 +6,20 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckUserType
+class UpdateUserLastActive
 {
     /**
      * Handle an incoming request.
      *
      * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
-    public function handle(Request $request, Closure $next, ...$type): Response
+    public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        if (!in_array($user->user_type, $type)){
-            abort(403);
-        };
-
+        if ($user) {
+            $user->forceFill(['last_active_at' => now()]);
+            $user->save();
+        }
         return $next($request);
     }
 }
