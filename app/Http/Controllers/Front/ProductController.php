@@ -11,6 +11,8 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $products = Product::where('status', ProductStatusEnum::Active)->get();
+        return view('front.products.index',compact('products'));
     }
 
     public function show(Product $product)

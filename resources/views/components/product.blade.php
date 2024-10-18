@@ -1,3 +1,4 @@
+
 @props(['product' => ''])
 <div class="single-product">
     <div class="product-image">
@@ -13,13 +14,13 @@
         @endif
         <div class="button">
 
-            <a href="{{ route('site.products.show',$product->slug) }}" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
+            <a href="{{ route('front.products.show',$product->slug) }}" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
         </div>
     </div>
     <div class="product-info">
         <span class="category">{{ $product->category->name }}</span>
         <h4 class="title">
-            <a href="{{ route('site.products.show',$product->slug) }}">{{ $product->name }}</a>
+            <a href="{{ route('front.products.show',$product->slug) }}">{{ $product->name }}</a>
         </h4>
         <ul class="review">
             <li><i class="lni lni-star-filled"></i></li>
