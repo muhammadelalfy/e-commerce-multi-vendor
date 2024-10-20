@@ -2,10 +2,6 @@
 @props([
     'name' , 'options' , 'selected' => false
 ])
-@dd($options)
-
-{{--@dd(old($name))--}}
-
         <select type="text" name="{{$name}}" class="form-control"
 
             {{  $attributes->class([
@@ -18,7 +14,6 @@
                 <option value="{{$value}}" @selected(old("$name" , "$value") == $value)> {{ $value}}  </option>
                     @empty
                          <option value="">No {{'No' . $name . '\'s'}} Found</option>
-
             @endforelse
         </select>
 

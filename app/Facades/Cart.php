@@ -3,7 +3,7 @@
 namespace App\Facades;
 
 use App\Repositories\CartRepository;
-use Facade;
+use Illuminate\Support\Facades\Facade;
 
 class Cart extends Facade
 {

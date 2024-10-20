@@ -1,6 +1,6 @@
 <x-front-layout>
-    home
-    {{--
+
+
     <x-slot name="breadcrumbs">
         <div class="breadcrumbs">
             <div class="container">
@@ -20,7 +20,7 @@
             </div>
         </div>
         </x-slot>
-        --}}
+
     <!-- Start Hero Area -->
     <section class="hero-area">
         <div class="container">
@@ -280,7 +280,6 @@
         </div>
     </section>
     <!-- End Banner Area -->
-
     <!-- Start Special Offer -->
     <section class="special-offer section">
         <div class="container">
@@ -288,8 +287,7 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2>Special Offer</h2>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                            suffered alteration in some form.</p>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
                     </div>
                 </div>
             </div>
@@ -300,10 +298,9 @@
                             <!-- Start Single Product -->
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="https://via.placeholder.com/335x335" alt="#">
+                                    <img src="https://via.placeholder.com/335x335" alt="WiFi Security Camera">
                                     <div class="button">
-                                        <a href="{{route('front.cart.store)}}" class="btn"><i class="lni lni-cart"></i> Add to
-                                            Cart</a>
+                                        <a href="{{ route('front.cart.store') }}" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -330,10 +327,9 @@
                             <!-- Start Single Product -->
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="https://via.placeholder.com/335x335" alt="#">
+                                    <img src="https://via.placeholder.com/335x335" alt="Apple MacBook Air">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                            Cart</a>
+                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -360,10 +356,9 @@
                             <!-- Start Single Product -->
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="https://via.placeholder.com/335x335" alt="#">
+                                    <img src="https://via.placeholder.com/335x335" alt="Bluetooth Speaker">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                            Cart</a>
+                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
                                     </div>
                                 </div>
                                 <div class="product-info">
@@ -388,12 +383,10 @@
                         </div>
                     </div>
                     <!-- Start Banner -->
-                    <div class="single-banner right"
-                         style="background-image:url('https://via.placeholder.com/730x310');margin-top: 30px;">
+                    <div class="single-banner right" style="background-image:url('https://via.placeholder.com/730x310'); margin-top: 30px;">
                         <div class="content">
-                            <h2>Samsung Notebook 9 </h2>
-                            <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
-                                incididunt ut labore.</p>
+                            <h2>Samsung Notebook 9</h2>
+                            <p>Lorem ipsum dolor sit amet,<br> eiusmod tempor incididunt ut labore.</p>
                             <div class="price">
                                 <span>$590.00</span>
                             </div>
@@ -407,7 +400,7 @@
                 <div class="col-lg-4 col-md-12 col-12">
                     <div class="offer-content">
                         <div class="image">
-                            <img src="https://via.placeholder.com/510x600" alt="#">
+                            <img src="https://via.placeholder.com/510x600" alt="Bluetooth Headphone">
                             <span class="sale-tag">-50%</span>
                         </div>
                         <div class="text">
@@ -424,8 +417,7 @@
                                 <span>$200.00</span>
                                 <span class="discount-price">$400.00</span>
                             </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry incididunt ut
-                                eiusmod tempor labores.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry incididunt ut eiusmod tempor laboris.</p>
                         </div>
                         <div class="box-head">
                             <div class="box">
@@ -442,11 +434,11 @@
                             </div>
                             <div class="box">
                                 <h1 id="seconds">00</h1>
-                                <h2 id="secondstxt">Secondes</h2>
+                                <h2 id="secondstxt">Seconds</h2>
                             </div>
                         </div>
                         <div style="background: rgb(204, 24, 24);" class="alert">
-                            <h1 style="padding: 50px 80px;color: white;">We are sorry, Event ended ! </h1>
+                            <h1 style="padding: 50px 80px; color: white;">We are sorry, Event ended!</h1>
                         </div>
                     </div>
                 </div>
@@ -454,6 +446,7 @@
         </div>
     </section>
     <!-- End Special Offer -->
+
 
     <!-- Start Home Product List -->
     <section class="home-product-list section">
@@ -836,7 +829,7 @@
             timer();
             setInterval(timer, 1000);
         </script>
-@endpush'scripts')
+@endpush
 
 
 </x-front-layout>

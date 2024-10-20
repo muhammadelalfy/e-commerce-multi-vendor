@@ -63,4 +63,12 @@ class Product extends Model
         }
         return  number_format(100 - (100 * $this->price / $this->compare_price),1);
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class , 'order_items')
+            ->using(OrderItem::class)
+            ->withPivot('quantity' , 'price' , 'product_name');
+
+    }
 }

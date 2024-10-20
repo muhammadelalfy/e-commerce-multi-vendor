@@ -51,7 +51,7 @@
                 </div>
                 @forelse($cart->get() as $item)
                     <!-- Cart Single List list -->
-                    <div class="cart-single-list">
+                    <div class="cart-single-lis remove-item-{{$item->product->id}}" >
                         <div class="row align-items-center">
                             <div class="col-lg-1 col-md-1 col-12">
                                 <a href=""><img src="https://via.placeholder.com/220x200" alt="#"></a>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2 col-12">
                                 <div class="count-input">
-                                    <input class="form-control" value="{{$item->quantity}}">
+                                    <input class="form-control quantity-change" data-id="{{$item->product_id}}" value="{{$item->quantity}}">
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-12">
@@ -75,7 +75,7 @@
                                 <p>{{ Currency::format(0) }}</p>
                             </div>
                             <div class="col-lg-1 col-md-2 col-12">
-                                <a class="remove-item" href="javascript:void(0)"><i class="lni lni-close"></i></a>
+                                <a class="remove-item remove-from-cart" data-id="{{$item->product->id}}" href="javascript:void(0)"><i class="lni lni-close"></i></a>
                             </div>
                         </div>
                     </div>
@@ -131,5 +131,6 @@
             </div>
         </div>
     </div>
+
     <!--/ End Shopping Cart -->
 </x-front-layout>

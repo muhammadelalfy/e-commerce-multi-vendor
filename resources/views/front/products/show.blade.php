@@ -51,9 +51,9 @@
                                         {{$product->compare_price}}
                                     @endif</span></h3>
                             <p class="info-text">{{$product->description}}</p>
-                            <form action="{{route('front.cart.store')}}" method="POST">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <form action="">
+{{--                                @csrf--}}
+{{--                                <input type="hidden" name="product_id" value="{{$product->id}}">--}}
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-12">
                                         <div class="form-group color-option">
@@ -89,7 +89,7 @@
                                     <div class="col-lg-4 col-md-4 col-12">
                                         <div class="form-group quantity">
                                             <label for="color">Quantity</label>
-                                            <select class="form-control" name="quantity">
+                                            <select class="form-control" name="quantity" id="quantity">
                                                 <option>1</option>
                                                 <option>2</option>
                                                 <option>3</option>
@@ -103,18 +103,18 @@
                                 <div class="bottom-content">
                                     <div class="row align-items-end">
                                         <div class="col-lg-4 col-md-4 col-12">
-                                            <div class="button cart-button">
-                                                <button class="btn" style="width: 100%;">Add to Cart</button>
+                                            <div class="button cart-button "   >
+                                                <button type="submit" class="btn add-to-cart"  id="add-to-cart-ajax" data-id="{{$product->id}}" style="width: 100%;" >Add to Cart</button>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="wish-button">
-                                                <button class="btn"><i class="lni lni-reload"></i> Compare</button>
+                                                <button class="btn" ><i class="lni lni-reload"></i> Compare</button>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="wish-button">
-                                                <button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
+                                                <button  class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
                                             </div>
                                         </div>
                                     </div>

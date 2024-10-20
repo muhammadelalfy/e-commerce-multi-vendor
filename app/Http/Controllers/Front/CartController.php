@@ -45,6 +45,9 @@ class CartController extends Controller
         ]);
         $product = Product::findOrFail($request->post('product_id'));
         $this->repository->add($product, $request->post('quantity'));
+        if ($request->wantsJson()) {
+            return response()->json(['message' => 'Product added to cart']);
+        }
         return redirect()->route('front.cart.index')->with('success', 'Product added to cart');
     }
 
@@ -67,24 +70,22 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1'
         ]);
-        $product = Product::findOrFail($request->post('product_id'));
         $repository = new CartModelRepository();
-        $repository->update($product, $request->post('quantity'));
+        $repository->update($id, $request->post('quantity'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        $product = Product::findOrFail($id);
         $repository = new CartModelRepository();
-        $repository->delete($product);
+        $repository->delete($id);
     }
 }
