@@ -18,6 +18,10 @@ return new class extends Migration {
             $table->string('status')->default('pending');
             $table->string('payment_status')->default('pending');
             $table->string('payment_method')->nullable();
+            $table->float('total', 10, 2);
+            $table->float('discount', 10, 2)->default(0);
+            $table->float('shipping', 10, 2)->default(0);
+            $table->float('tax', 10, 2)->default(0);
             $table->timestamps();
         });
     }

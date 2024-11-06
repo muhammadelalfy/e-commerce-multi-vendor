@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 (function ($) {
+    console.log('Cart JS loaded');
     const csrfToken = csrf; // Ensure csrf is defined in your Blade template
 
     // Reusable AJAX function

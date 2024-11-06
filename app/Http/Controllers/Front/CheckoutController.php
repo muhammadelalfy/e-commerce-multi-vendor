@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\OrderCreated;
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
+use App\Http\Requests\AddressRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Repositories\CartRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Intl\Countries;
 
@@ -25,7 +25,7 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(Request $request, CartRepository $cart)
+    public function store(AddressRequest $request, CartRepository $cart)
     {
         DB::beginTransaction();
         try {
@@ -37,6 +37,7 @@ class CheckoutController extends Controller
                     'store_id' => $storeId,
                     'payment_method' => 'cash',
                 ]);
+
                 foreach ($cartItems as $item) {
                     OrderItem::create([
                         'order_id' => $order->id,
@@ -46,10 +47,12 @@ class CheckoutController extends Controller
                         'product_name' => $item->product->name,
                     ]);
                 }
-                foreach ($request->post('addr') as $type => $address) {
+                foreach ($request->validated()['addr'] as $type => $address) {
                     $address['type'] = $type;
                     $order->addresses()->create($address);
                 }
+                event(new OrderCreated($order));
+
             }
             $cart->empty();
 
@@ -58,7 +61,7 @@ class CheckoutController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            info($e);
+            info($e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }

@@ -20,7 +20,9 @@ protected $guarded = [];
     {
         static::creating(function ($order) {
             $order->number = Order::getNextOrderNumber();
-        });
+            $order->total = $order->products->sum(function ($product) {
+                return $product->order_item->price;
+            });        });
     }
     public function items()
     {
@@ -38,7 +40,10 @@ protected $guarded = [];
     }
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'order_items')->withPivot('quantity', 'price' , 'product_name');
+        return $this->belongsToMany(Product::class, 'order_items')
+            ->using(OrderItem::class) //to return OrderItem model not pivot class
+            ->as('order_item') // rename pivot to order_item and use order_item to access pivot data
+            ->withPivot('quantity', 'price' , 'product_name'); //if you want to access pivot data without it will return foreign keys only
     }
 
     public function addresses()
