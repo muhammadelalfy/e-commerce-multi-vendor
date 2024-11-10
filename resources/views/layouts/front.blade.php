@@ -86,18 +86,36 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-end">
+                        @auth('web')
+
+                            <div class="user">
+                                <i class="lni lni-user"></i>
+                                {{auth()->user()->name}}
+                            </div>
+                            <ul class="user-login">
+                                <li>
+                                    <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logoutForm').submit()">Logout</a>
+                                </li>
+                            </ul>
+                            <form id="logoutForm" style="display: none" action="{{route('logout')}}" method="post">
+                                @csrf
+                            </form>
+
+                        @else
                         <div class="user">
                             <i class="lni lni-user"></i>
                             Hello
                         </div>
                         <ul class="user-login">
                             <li>
-                                <a href="login.html">Sign In</a>
+                                <a href="{{route('login')}}">Sign In</a>
                             </li>
                             <li>
-                                <a href="register.html">Register</a>
+                                <a href="{{route('register')}}">Register</a>
                             </li>
                         </ul>
+                        @endauth
+
                     </div>
                 </div>
             </div>

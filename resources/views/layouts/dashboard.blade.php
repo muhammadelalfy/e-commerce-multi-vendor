@@ -16,12 +16,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo asset('dist/css/adminlte.min.css')  ?>">
 {{--    @stack('css')--}}
-    @vite('resources/js/app.js')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 
 </head>
 <body class="hold-transition sidebar-mini" id="app">
-<App />
+{{--<App />--}}
 
 <div class="wrapper" >
 
@@ -61,13 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-        <div class="p-3">
-            <h5>Title</h5>
-            <p>Sidebar content</p>
-        </div>
-    </aside>
+@include('layouts.partials.sidebar')
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
@@ -91,5 +84,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 @stack('script')
+<script>
+    const userId = "{{auth()->id()}}"
+</script>
+@vite('resources/js/app.js')
 </body>
 </html>

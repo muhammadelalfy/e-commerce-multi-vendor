@@ -23,7 +23,6 @@ class OrderCreatedNotification
     {
         $order = $event->order;
         $user = User::where('store_id', $order->store_id)->first();
-        $user->notify(new SendOrderCreatedNotification());
-        dd($user->notify(new SendOrderCreatedNotification()));
+        $user->notify(new SendOrderCreatedNotification($order));
     }
 }

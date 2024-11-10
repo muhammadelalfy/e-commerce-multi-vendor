@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Events\OrderCreated;
 use App\Listeners\DeductQuantityFromProduct;
-use App\Listeners\EmptyCart;
 use App\Listeners\OrderCreatedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;

@@ -54,7 +54,6 @@ class CheckoutController extends Controller
                 event(new OrderCreated($order));
 
             }
-            $cart->empty();
 
             DB::commit();
             return redirect()->route('home')->with('success', 'Order has been placed successfully');

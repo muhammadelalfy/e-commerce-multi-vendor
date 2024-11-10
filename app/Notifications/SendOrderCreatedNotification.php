@@ -2,8 +2,11 @@
 
 namespace App\Notifications;
 
+use App\Events\OrderCreated;
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -11,12 +14,14 @@ class SendOrderCreatedNotification extends Notification
 {
     use Queueable;
 
+    public $order;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -26,7 +31,7 @@ class SendOrderCreatedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -43,13 +48,28 @@ class SendOrderCreatedNotification extends Notification
 
     /**
      * Get the array representation of the notification.
-     *
+     * the data column in notifications table
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toDatabase()
     {
         return [
-            //
+            'body' => 'Your order has been created successfully.',
+            'icon' => 'fas fa-envelope mr-2',
+            'url' => '/orders',
+            'order_id' => $this->order->id,
         ];
+
     }
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'body' => 'Your order has been created successfully.',
+            'icon' => 'fas fa-envelope mr-2',
+            'url' => '/orders',
+            'order_id' => $this->order->id,
+        ]);
+    }
+
 }
