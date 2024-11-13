@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Front\ProductController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index'])->name('home');
+Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index'])->name('home')->middleware('2fa');
 
 // Route::view('/{any?}', 'dashboard')
 //     ->name('dashboard')
