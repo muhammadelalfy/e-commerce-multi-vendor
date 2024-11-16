@@ -17,6 +17,13 @@ return [
 
     'name' => env('APP_NAME', 'e-commerce'),
 
+
+    /*
+     * The API token to be used for the application
+     */
+
+    'api_token' => env('API_TOKEN'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

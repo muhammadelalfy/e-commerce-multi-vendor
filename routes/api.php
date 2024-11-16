@@ -1,24 +1,31 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AccessTokenController;
+use App\Http\Controllers\Api\ProductsController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return \Illuminate\Support\Facades\Auth::guard('sanctum')->user();
+Route::prefix('auth')->group(function () {
+    // Routes for guest users
+    Route::middleware('guest:sanctum')->group(function () {
+        Route::post('accessToken', [AccessTokenController::class, 'store']);
+    });
+
+    // Routes for authenticated users
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::delete('accessToken/{token?}', [AccessTokenController::class, 'destroy']);
+        Route::get('user', function (Request $request) {
+            return Auth::guard('sanctum')->user();
+        });
+        Route::post('logout', [AccessTokenController::class, 'destroy']);
+    });
 });
 
-Route::post('login' , [AccessTokenController::class,'store'])->middleware('guest:sanctum');
+// User route with authentication middleware
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return Auth::guard('sanctum')->user();
+});
 
-// Route::get('navitems', [\App\Http\Controllers\Api\HomeController::class,'getNavItems']);
-
+// Product resource routes
+Route::apiResource('products', ProductsController::class);

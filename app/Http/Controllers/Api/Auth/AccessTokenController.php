@@ -3,40 +3,65 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TokenRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Response;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AccessTokenController extends Controller
 {
-    public function store(TokenRequest $request){
-//
-//dd('dd');
-//        dd('ss');
-// $request->validate([
-//     'email' => 'required|email|max:255',
-//     'password' => 'required|string|min:10',
-//     'device_name' => 'string|max:255'
-// ]);
 
-        $user = User::where('email' , $request->email)->first();
-        $device_name = $request->post('device_name' , $request->userAgent());
-        if ($user && Hash::check($request->password , $user->password)){
+    public function store(Request $request)
+    {
 
-        $token = $user->createToken($device_name);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'device_name' => 'sometimes|required',
+            'abilities' => 'required|array'
+        ]);
 
-        return Response::json([
-            'code' => 100,
-            'token' => $token->plainTextToken,
-            'user' => $user
-        ] , 201);
+//        dd($request->all());
+
+        if (!auth()->attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'message' => 'The provided credentials are incorrect.'
+            ], 401);
+        }
+
+        return response()->json([
+            'token' => auth()->user()->createToken($request->post('device_name', $request->userAgent()) , $request->post('abilities'))->plainTextToken,
+            'user' => auth()->user()
+        ]);
+
     }
 
-        return Response::json([
-            'code' => 0,
-            'message' => 'unauthenticated token'
-        ] , 401);
+
+    public function destroy($token = null)
+    {
+
+        $user = auth('sanctum')->user();
+        //logout from all devices
+//        $user->tokens()->delete();
+        if (null === $token) {
+            $user->currentAccessToken->delete(); // Revoke the current token
+            return response()->json([
+                'message' => 'Token deleted successfully'
+            ]);
+        }
+
+        $tokenOfUser = PersonalAccessToken::findToken($token);
+        if (
+            $tokenOfUser &&
+            $tokenOfUser->tokenable_id === $user->id &&
+            $tokenOfUser->tokenable_type === get_class($user)
+
+        ) {
+            {
+                $tokenOfUser->delete();
+                return response()->json([
+                    'message' => 'Token deleted successfully'
+                ]);
+            }
+
+        }
     }
 }

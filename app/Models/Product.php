@@ -12,11 +12,23 @@ use Illuminate\Support\Str;
 
 class Product extends Model
 {
-    use HasFactory , ProductFilter;
+    use HasFactory, ProductFilter;
 
     const Active = ProductStatusEnum::Active;
     const Inactive = ProductStatusEnum::Inactive;
     protected $fillable = ['name', 'description', 'slug', 'store_id', 'category_id', 'price', 'compare_price', 'status'];
+    protected $appends = ['image_url', 'sale_percent'];
+    protected $hidden = ['created_at', 'updated_at', 'store_id', 'category_id', 'image'];
+
+
+    protected static function booted()
+    {
+        static::addGlobalScope('store', new StoreScope());
+        static::creating(function ($product) {
+            $product->slug = Str::slug($product->name);
+        });
+    }
+
 
     public function Category()
     {
@@ -28,11 +40,6 @@ class Product extends Model
         return $this->belongsTo(Store::class, 'store_id', 'id');
     }
 
-
-    protected static function booted()
-    {
-        static::addGlobalScope('store', new StoreScope());
-    }
 
     public function tags()
     {
@@ -110,7 +117,6 @@ class Product extends Model
         })->when($options['store_id'], function ($query, $storeId) {
             $query->where('store_id', $storeId);
         });
-
 
 
     }

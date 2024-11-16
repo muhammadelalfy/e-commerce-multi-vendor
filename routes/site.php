@@ -26,3 +26,5 @@ Route::delete('two-factor-authentication', [TwoFactorAuthenticationController::c
 Route::view('2fa-status', 'front.auth.2fa.change-status')->name('2fa-status')->middleware('auth');
 Route::view('2fa-qr-code', 'front.auth.2fa.qrcode')->middleware('auth');
 Route::view('two-factor-challenge', 'front.auth.2fa.challenge');
+
+
