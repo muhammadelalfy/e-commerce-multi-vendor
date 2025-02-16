@@ -17,7 +17,7 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 
 
-Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index'])->name('home')->middleware('2fa');
+Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index'])->name('home');
 
 // Route::view('/{any?}', 'dashboard')
 //     ->name('dashboard')
