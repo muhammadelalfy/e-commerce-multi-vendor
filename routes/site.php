@@ -9,7 +9,7 @@ use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticationController;
 
 
 Route::group(['as' => 'front.' /*, 'middleware' => '2fa'*/], function () {
-    Route::resource('products', ProductController::class)->middleware('setAdminStore');
+    Route::resource('products', ProductController::class)->middleware('setAdminStore')->middleware('setActiveStore');
     Route::get('products/{product:slug}', [ProductController::class, 'show'])->name('products.show'); //take slug insted of id and go to show method
     Route::resource('cart', CartController::class);
     Route::get('checkout', [CheckoutController::class, 'create'])->name('checkout.create');

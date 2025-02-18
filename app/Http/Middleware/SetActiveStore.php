@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\Store;
 
 class SetActiveStore
 {
@@ -15,6 +16,12 @@ class SetActiveStore
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $domain = $request->getHost();
+
+        $store = Store::where('domain', $domain)->first()->id;
+        if ($store) {
+            $request->attributes->set('store_id', $store);
+        }
         return $next($request);
     }
 }

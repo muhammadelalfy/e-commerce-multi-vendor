@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::where('status', ProductStatusEnum::Active)->get();
+        $products = Product::where('status', ProductStatusEnum::Active)
+        ->where('store_id', $request->attributes
+        ->get('store_id'))->get();
+        return response()->json($products);
         return view('front.products.index',compact('products'));
     }
 
